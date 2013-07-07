@@ -161,7 +161,18 @@ getCompileFn = (config, joinConfig, fileList, optimizers, watcher, callback) -> 
       else
         logger.error error
     else
-      logger.info "compiled in #{Date.now() - startTime}ms"
+      total = generatedFiles.reduce (all, _) ->
+        changed = _.sourceFiles.filter (_) ->
+          _.compilationTime > startTime
+        all + changed.length
+      , 0
+      formattedTotal = if total is 0
+        ' '
+      else if total is 1
+        "#{total} file "
+      else
+        "#{total} files "
+      logger.info "compiled #{formattedTotal}in #{Date.now() - startTime}ms"
 
     # If it’s single non-continuous build, close file watcher and
     # exit process with correct exit code.
