@@ -118,12 +118,15 @@ sort = (files, config) ->
     indexes[path]
 
 # New.
-concat = (files, path, type, definition) ->
+concat = (files, path, type, definition, config) ->
   # nodes = files.map toNode
   root = new SourceNode()
   debug "Concatenating #{files.map((_) -> _.path).join(', ')} to #{path}"
   files.forEach (file) ->
     root.add file.node
+    if type is 'javascript' and config.safeJsConcat
+      lastChar = file.node.toString().match(/(\S)(\n\s*\/\/.*\n)?(\s*\/\*.*\*\/\s*)?\s*$/)
+      root.add ';' if lastChar and lastChar[1] not in [';', '}']
     #debug JSON.stringify(file.node)
     root.setSourceContent file.node.source, file.source
 
@@ -166,7 +169,7 @@ generate = (path, sourceFiles, config, optimizers, callback) ->
 
   sorted = sort sourceFiles, config
 
-  {code, map} = concat sorted, path, type, config._normalized.modules.definition
+  {code, map} = concat sorted, path, type, config._normalized.modules.definition, config
 
   withMaps = (map and config.sourceMaps)
   mapPath = "#{path}.map"

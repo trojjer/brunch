@@ -218,6 +218,7 @@ exports.setConfigDefaults = setConfigDefaults = (config, configPath) ->
   config.notifications ?= true
   config.sourceMaps   ?= true
   config.optimize     ?= false
+  config.safeJsConcat ?= false
 
   modules              = config.modules      ?= {}
   modules.wrapper     ?= 'commonjs'
