@@ -29,8 +29,7 @@
   "scripts": {
     "prepublish": "node setup.js prepublish",
     "postpublish": "node setup.js postpublish",
-    "test": "node setup.js test",
-    "postinstall": "node setup.js postinstall"
+    "test": "node setup.js test"
   },
   "preferGlobal": true,
   "dependencies": {
@@ -40,7 +39,7 @@
     "ncp": "~0.4.2",
     "debug": "~0.7.2",
     "source-map": "~0.1.26",
-    "chokidar": "~0.6.2",
+    "chokidar": "git://github.com/paulmillr/chokidar#8d8bafb82c7c9f076325b742046bfa73e64a6d5b",
     "init-skeleton": "~0.2.0",
     "loggy": "~0.2.0",
     "pushserve": "~0.1.6",

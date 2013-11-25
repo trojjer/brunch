@@ -393,11 +393,13 @@ bindWatcherEvents = (config, fileList, compilers, linters, watcher, reload, onCh
   watcher
     .on('error', logger.error)
     .on 'add', (path) ->
+      path = sysPath.relative config.paths.root, path
       isConfigFile = possibleConfigFiles[path]
       isPluginsFile = path in [packageConfig, bowerConfig]
       unless isConfigFile or isPluginsFile
         changeHandler path
     .on 'change', (path) ->
+      path = sysPath.relative config.paths.root, path
       # If file is special (config.coffee, package.json), restart Brunch.
       isConfigFile = possibleConfigFiles[path]
       isPackageFile = path is packageConfig
@@ -408,6 +410,7 @@ bindWatcherEvents = (config, fileList, compilers, linters, watcher, reload, onCh
       else
         changeHandler path
     .on 'unlink', (path) ->
+      path = sysPath.relative config.paths.root, path
       # If file is special (config.coffee, package.json), exit.
       # Otherwise, just update file list.
       isConfigFile = possibleConfigFiles[path]
