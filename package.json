@@ -39,7 +39,7 @@
     "ncp": "~0.4.2",
     "debug": "~0.7.2",
     "source-map": "~0.1.26",
-    "chokidar": "git://github.com/paulmillr/chokidar#48e8d5aba51ac40d1145801a371a02f8f80426ec",
+    "chokidar": "git://github.com/paulmillr/chokidar#5403a0056f6d924da2d0adfbb365e3d285689a72",
     "init-skeleton": "~0.2.0",
     "loggy": "~0.2.0",
     "pushserve": "~0.1.6",
